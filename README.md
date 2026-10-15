@@ -1,6 +1,6 @@
 # Días Felices
 
-Un pequeño rincón privado para guardar anécdotas, bromas y recuerdos de la pandilla. La interfaz está hecha con HTML, CSS y JavaScript sin proceso de compilación; Supabase gestiona las cuentas y los datos.
+Un pequeño rincón privado para guardar anécdotas, bromas y recuerdos de la muchachada. La interfaz está hecha con HTML, CSS y JavaScript sin proceso de compilación; Supabase gestiona las cuentas y los datos.
 
 ## Páginas
 

@@ -78,7 +78,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .orb-1 { background: rgba(222, 171, 125, .55); }
 .orb-2 { background: rgba(151, 186, 155, .52); }
 .main-content, .blog-container { position: relative; z-index: 1; }
-.main-content { flex: 1; width: min(900px, calc(100% - 40px)); padding: 70px 0; }
+.main-content { flex: 1; width: min(900px, calc(100% - 40px)); margin-inline: auto; padding: 70px 0; }
+.main-content.auth-page { display: grid; place-items: center; width: 100%; margin: 0; padding: 48px 20px; }
+.auth-page .auth-box { width: min(100%, 440px); margin-inline: auto; }
 .main-content > h2, .blog-container > h1 { font-family: 'Manrope', sans-serif !important; letter-spacing: -.055em !important; }
 .main-content > h2 { margin-bottom: 32px !important; font-size: clamp(1.75rem, 4vw, 2.6rem); text-align: left !important; color: var(--ink); }
 .poll-card, .ranking-box, .profile-box, .auth-box, .admin-panel, .post-form {
