@@ -1,51 +1,38 @@
-# 🤡Ya se vera...
+# Días Felices
 
-> "Posiblemente sea para bullear a nani."
+Un pequeño rincón privado para guardar anécdotas, bromas y recuerdos de la pandilla. La interfaz está hecha con HTML, CSS y JavaScript sin proceso de compilación; Supabase gestiona las cuentas y los datos.
 
-Bienvenido al repositorio oficial del blog más absurdo, alejado de cualquier estándar de producción serio, pero hecho con mucho amor (y algo de código).
+## Páginas
 
----
+- `index.html`: portada y accesos principales.
+- `blog.html`: muro de publicaciones.
+- `perfil.html`: perfil del usuario.
+- `ranking.html` y `encuestas.html`: secciones para usuarios registrados.
+- `login.html` y `registro.html`: acceso y creación de cuentas.
+- `admin.html` y `gestion-usuarios.html`: herramientas de administración.
+- `menu.html`: navegación compartida, cargada en cada página.
+- `site.css`: estilos visuales compartidos.
+- `js/auth.js`: autenticación y navegación según sesión y rol.
 
-## 🎯 ¿Qué es esto?
-Este proyecto es una página web diseñada para centralizar toda nuestra sabiduría:
-* Chistes internos que nadie más entiende.
-* Enlaces a vídeos de YouTube.
-* Espacio para subir anécdotas random, estilo blog retro.
-* Ranking semanal de los integrantes de la pandilla.
-* Encuestas semanales.
-* Biografía de los compas.
+## Ejecutar en local
 
----
+Como las páginas cargan `menu.html` con `fetch`, abre el proyecto con un servidor local en vez de abrir el HTML directamente. Por ejemplo, con Python:
 
-## 🛠️ Tecnologías que usaremos
-Por aquí andaremos trasteando con:
-* **Frontend:** HTML5, CSS3 / Bootstrap (para que al menos parezca medio apañado).
-* **Backend / Lógica:** JavaScript.
-* **Base de Datos en la Nube:** Supabase.
-* **Control de versiones:** Git & GitHub.
-* **Diagrama para base de datos:** dbdiagram.io.
+```bash
+python -m http.server 8000
+```
 
----
+Después visita <http://localhost:8000>.
 
-## 👥 Equipo de Desarrollo (Los Implicados)
-* **Kei** - *Arquitecto del Caos*
-* **Mi persona** - *Proveedor oficial de vídeos raros de YouTube*
-* **Yo** - *Encargado de romper la base de datos*
+## Publicar con GitHub Pages
 
----
+1. Sube la rama que quieras publicar a GitHub.
+2. En el repositorio, abre **Settings → Pages**.
+3. En **Build and deployment**, selecciona **Deploy from a branch**, elige la rama y la carpeta raíz (`/`), y guarda.
+4. Cuando termine la publicación, GitHub mostrará la dirección del sitio en esa misma sección.
 
-## 🚀 Cómo arrancar esto en local (Por si acaso)
-Si algún día te aburres y quieres probar el código en tu ordenador:
+La aplicación usa Supabase desde el navegador. Antes de publicar, revisa las políticas de acceso (RLS) de las tablas y configura en Supabase las URL de redirección de autenticación para el dominio de GitHub Pages. La clave incluida en el cliente debe ser únicamente una clave publicable; nunca pongas una clave `service_role` en estos archivos.
 
-1. Clona el repositorio:
-   ```bash
-   git clone [https://github.com/kcd2/Random]
+## Base de datos
 
-
----
-
-## 📊 Base de Datos: El Motor de "Días Felices"
-
-base de datos relacional para guardar las biografías, los videos y el guestbook. 
-
-📁 [Haz clic aquí para ver el diagrama de la base de datos (PDF)](dias_felices.pdf)
+El diagrama relacional está en [`dias_felices.pdf`](dias_felices.pdf).

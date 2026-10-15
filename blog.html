@@ -29,6 +29,7 @@
         .post-date { font-size: 0.7rem; color: #777; margin-bottom: 10px; display: block; }
         .post-content { margin: 0; font-size: 0.95rem; line-height: 1.5; color: #ddd; }
     </style>
+    <link rel="stylesheet" href="site.css">
 </head>
 <body>
     <div class="interactive-bg">
@@ -38,7 +39,8 @@
     <div id="menu-container"></div>
 
     <div class="blog-container">
-        <h2 class="mb-4" style="font-family: 'Oswald', sans-serif; letter-spacing: 2px;">EL MURO</h2>
+        <p class="eyebrow">Historias de la pandilla</p>
+        <h1 class="mb-4" style="font-family: 'Oswald', sans-serif; letter-spacing: 2px;">El muro</h1>
         
         <form id="formBlog" class="post-form" style="display: none;">
             <textarea id="contenidoPost" class="post-input" rows="3" placeholder="¿Qué tienes en mente hoy?" required></textarea>
@@ -83,25 +85,46 @@
                 .order('created_at', { ascending: false });
 
             const feed = document.getElementById('feedBlog');
-            if (error) return feed.innerHTML = `<p class="text-danger">Error: ${error.message}</p>`;
-            if (!posts.length) return feed.innerHTML = `<p class="text-muted">No hay publicaciones aún. ¡Sé el primero!</p>`;
+            if (error) {
+                feed.textContent = `No se pudieron cargar las publicaciones: ${error.message}`;
+                feed.setAttribute('role', 'status');
+                return;
+            }
+            if (!posts.length) {
+                feed.textContent = 'No hay publicaciones aún. ¡Sé el primero!';
+                return;
+            }
 
-            feed.innerHTML = posts.map(post => {
-                const autor = post.amigos?.nombre_real || 'Usuario Desconocido';
-                const foto = post.amigos?.foto_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(autor)}&background=111111&color=ffffff`;
-                const fecha = new Date(post.created_at).toLocaleString();
-                
-                return `
-                    <div class="post-card">
-                        <img src="${foto}" class="post-avatar">
-                        <div>
-                            <h4 class="post-author">${autor}</h4>
-                            <span class="post-date">${fecha}</span>
-                            <p class="post-content">${post.contenido}</p>
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            const fragment = document.createDocumentFragment();
+            posts.forEach(post => {
+                const autor = post.amigos?.nombre_real || 'Usuario desconocido';
+                const foto = post.amigos?.foto_url || `https://ui-avatars.com/api/?name=${encodeURIComponent(autor)}&background=dce8dc&color=18312d`;
+                const card = document.createElement('article');
+                card.className = 'post-card';
+
+                const avatar = document.createElement('img');
+                avatar.src = foto;
+                avatar.alt = '';
+                avatar.className = 'post-avatar';
+                avatar.loading = 'lazy';
+
+                const details = document.createElement('div');
+                const author = document.createElement('h2');
+                author.className = 'post-author';
+                author.textContent = autor;
+                const date = document.createElement('time');
+                date.className = 'post-date';
+                date.dateTime = post.created_at;
+                date.textContent = new Date(post.created_at).toLocaleString('es-ES');
+                const content = document.createElement('p');
+                content.className = 'post-content';
+                content.textContent = post.contenido || '';
+
+                details.append(author, date, content);
+                card.append(avatar, details);
+                fragment.append(card);
+            });
+            feed.replaceChildren(fragment);
         }
 
         document.getElementById('formBlog').addEventListener('submit', async (e) => {

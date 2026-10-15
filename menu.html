@@ -1,158 +1,50 @@
-<nav class="navbar-custom">
-    <a href="index.html" class="navbar-brand-txt">Días Felices</a>
+<nav class="navbar-custom" aria-label="Navegación principal">
+    <a href="index.html" class="navbar-brand-txt" aria-label="Días Felices, inicio">Días Felices</a>
     <div class="nav-links">
-        <a href="index.html" id="link-home">Home</a>
-        <a href="blog.html" id="link-blog">Blog</a>
+        <a href="index.html" id="link-home">Inicio</a>
+        <a href="blog.html" id="link-blog">El muro</a>
         <a href="ranking.html" id="link-ranking" style="display: none;">Ranking</a>
         <a href="encuestas.html" id="link-encuestas" style="display: none;">Encuestas</a>
         <div id="gestion-dropdown" class="nav-dropdown-group" style="display: none;">
-            <span class="nav-dropdown-toggle" onclick="toggleGestionMenu(event)">GESTION ▼</span>
+            <button type="button" class="nav-dropdown-toggle" onclick="toggleGestionMenu(event)" aria-expanded="false" aria-controls="gestionDropdownContent">Gestión <span aria-hidden="true">⌄</span></button>
             <div id="gestionDropdownContent" class="nav-dropdown-content">
-                <a href="gestion-usuarios.html">Gestión de Usuarios</a>
+                <a href="gestion-usuarios.html">Gestión de usuarios</a>
             </div>
         </div>
     </div>
     <div class="auth-menu-container">
         <div id="guest-links" style="display: flex; gap: 20px; align-items: center;">
-            <a href="login.html" class="nav-auth-btn">Login</a>
-            <a href="registro.html" class="nav-auth-btn">Registro</a>
+            <a href="login.html" class="nav-auth-btn">Entrar</a>
+            <a href="registro.html" class="nav-auth-btn">Crear cuenta</a>
         </div>
         <div id="user-dropdown" class="dropdown" style="display: none;">
-            <div class="dropdown-toggle-custom" onclick="toggleUserMenu(event)">
-                <img id="navUserAvatar" src="" alt="Avatar" class="nav-avatar">
+            <button type="button" class="dropdown-toggle-custom" onclick="toggleUserMenu(event)" aria-expanded="false" aria-controls="dropdownMenu">
+                <img id="navUserAvatar" src="" alt="" class="nav-avatar">
                 <span id="navUserName">Cuenta</span>
-                <span style="font-size: 0.6rem;">▼</span>
-            </div>
+                <span aria-hidden="true">⌄</span>
+            </button>
             <div id="dropdownMenu" class="dropdown-content-custom">
-                <a href="perfil.html">Mi Perfil</a>
-                <a href="#" onclick="cerrarSesion(event)" style="color: #ff6b6b;">Cerrar Sesión</a>
+                <a href="perfil.html">Mi perfil</a>
+                <a href="#" onclick="cerrarSesion(event)">Cerrar sesión</a>
             </div>
         </div>
     </div>
 </nav>
 
 <style>
-    .navbar-custom {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 20px 40px;
-        background: rgba(5, 5, 5, 0.8);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        width: 100%;
-        box-sizing: border-box;
-    }
-    .navbar-brand-txt {
-        font-family: 'Oswald', sans-serif;
-        font-size: 1.2rem;
-        color: #fff;
-        text-decoration: none;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-    }
-    .nav-links {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-    }
-    .nav-links a {
-        color: var(--text-muted, #777);
-        text-decoration: none;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        transition: color 0.3s;
-    }
-    .nav-links a:hover { color: #fff; }
-
-    .nav-dropdown-group { 
-        position: relative; 
-        display: inline-flex; 
-        align-items: center; 
-    }
-    .nav-dropdown-toggle {
-        color: var(--text-muted, #777);
-        text-decoration: none;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: color 0.3s;
-        line-height: 1;
-    }
-    .nav-dropdown-toggle:hover { color: #fff; }
-    
-    .nav-dropdown-content {
-        display: none;
-        position: absolute;
-        left: 0;
-        top: 30px;
-        background: rgba(15, 15, 15, 0.95);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        min-width: 180px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        z-index: 1000;
-        border-radius: 6px;
-        overflow: hidden;
-    }
-    .nav-dropdown-content a {
-        color: #fff;
-        padding: 10px 15px;
-        text-decoration: none;
-        display: block;
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    .nav-dropdown-content a:hover { background: rgba(255, 255, 255, 0.1); }
-    .show-gestion { display: block; }
-
-    .auth-menu-container { position: relative; display: flex; align-items: center; }
-    .nav-auth-btn { color: var(--text-muted, #777); text-decoration: none; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s; }
-    .nav-auth-btn:hover { color: #fff; }
-    
-    .dropdown-toggle-custom {
-        display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 5px 10px;
-        background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; transition: background 0.3s;
-    }
-    .dropdown-toggle-custom:hover { background: rgba(255, 255, 255, 0.1); }
-    .nav-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
-    #navUserName { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #fff; }
-
-    .dropdown-content-custom {
-        display: none; position: absolute; right: 0; top: 45px; background: rgba(15, 15, 15, 0.95);
-        border: 1px solid rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); min-width: 160px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; border-radius: 6px; overflow: hidden;
-    }
-    .dropdown-content-custom a {
-        color: #fff; padding: 12px 16px; text-decoration: none; display: block;
-        font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; transition: background 0.2s;
-    }
-    .dropdown-content-custom a:hover { background: rgba(255, 255, 255, 0.1); }
-    .show { display: block; }
+    #menu-container .navbar-custom { background: rgba(255, 253, 247, .86); border: 1px solid rgba(255,255,255,.8); }
+    #menu-container .navbar-brand-txt { font-family: 'Manrope', sans-serif; color: var(--ink); }
+    #menu-container .nav-links { display:flex; align-items:center; gap:5px; }
+    #menu-container .nav-links a, #menu-container .nav-dropdown-toggle, #menu-container .nav-auth-btn { color:var(--ink-soft); text-decoration:none; font-size:.83rem; text-transform:none; letter-spacing:0; }
+    #menu-container .nav-links a:hover, #menu-container .nav-links a.active, #menu-container .nav-dropdown-toggle:hover { background:var(--paper-deep); color:var(--ink); }
+    #menu-container .nav-dropdown-toggle { border:0; background:transparent; cursor:pointer; font:600 .83rem 'DM Sans',sans-serif; }
+    #menu-container .nav-dropdown-content, #menu-container .dropdown-content-custom { top:calc(100% + 10px); border:1px solid var(--line); border-radius:16px; background:#fffdf7; box-shadow:var(--shadow); }
+    #menu-container .nav-dropdown-content a, #menu-container .dropdown-content-custom a { display:block; padding:11px 15px; color:var(--ink); font-size:.88rem; font-weight:600; text-transform:none; letter-spacing:0; }
+    #menu-container .nav-dropdown-content a:hover, #menu-container .dropdown-content-custom a:hover { background:var(--paper); }
+    #menu-container .auth-menu-container { display:flex; align-items:center; }
+    #menu-container .nav-auth-btn:last-child { color:#fff; background:var(--ink); padding:9px 17px; }
+    #menu-container .nav-auth-btn:last-child:hover { color:#fff; background:var(--accent-deep); }
+    #menu-container .dropdown-toggle-custom { display:flex; align-items:center; gap:9px; border:1px solid var(--line); border-radius:999px; background:#fff; color:var(--ink); cursor:pointer; }
+    #menu-container #navUserName { color:var(--ink); font:700 .84rem 'DM Sans',sans-serif; text-transform:none; letter-spacing:0; }
+    @media (max-width:820px) { #menu-container .nav-links { order:3; width:100%; flex-wrap:wrap; justify-content:center; } }
 </style>
-
-<script>
-    function toggleGestionMenu(e) {
-        e.stopPropagation();
-        document.getElementById("gestionDropdownContent").classList.toggle("show-gestion");
-        document.getElementById("dropdownMenu").classList.remove("show");
-    }
-
-    function toggleUserMenu(e) {
-        e.stopPropagation();
-        document.getElementById("dropdownMenu").classList.toggle("show");
-        document.getElementById("gestionDropdownContent").classList.remove("show-gestion");
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.closest('#gestion-dropdown') && !event.target.closest('#user-dropdown')) {
-            const gestionMenu = document.getElementById("gestionDropdownContent");
-            const userMenu = document.getElementById("dropdownMenu");
-            if (gestionMenu) gestionMenu.classList.remove("show-gestion");
-            if (userMenu) userMenu.classList.remove("show");
-        }
-    }
-</script>
