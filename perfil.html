@@ -3,230 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#191919">
     <title>Días Felices - Mi Perfil</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #050505;
-            --text-main: #ffffff;
-            --text-muted: #777777;
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
 
-        .interactive-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            transition: transform 0.2s ease-out;
-        }
-        .orb-1 {
-            width: 40vw; height: 40vw;
-            background: rgba(255, 255, 255, 0.15);
-            top: -5%; left: -5%;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-        .orb-2 {
-            width: 35vw; height: 35vw;
-            background: rgba(60, 130, 200, 0.2);
-            bottom: -5%; right: -5%;
-            animation: float 25s infinite alternate-reverse ease-in-out;
-        }
-        @keyframes float {
-            0% { margin-top: 0; margin-left: 0; }
-            100% { margin-top: 50px; margin-left: 80px; }
-        }
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=pilcrow-rounded@400,500,700&display=swap" rel="stylesheet">
 
-        .navbar-custom {
-            padding: 30px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .navbar-brand-txt {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
-
-        .main-content {
-            flex: 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            padding: 40px 20px;
-        }
-        .profile-box {
-            width: 100%; 
-            max-width: 600px; 
-            padding: 40px;
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            text-align: center;
-        }
-        .profile-img-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px auto;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--border-color);
-            background: #111;
-        }
-        .profile-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .profile-name {
-            font-family: 'Oswald', sans-serif;
-            font-size: 2rem;
-            letter-spacing: 1px;
-            margin-bottom: 5px;
-        }
-        .profile-role {
-            font-size: 0.8rem;
-            color: #8ebdf0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-        }
-        .stats-container {
-            display: flex;
-            justify-content: space-around;
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.05);
-            margin-bottom: 30px;
-        }
-        .stat-item h4 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.5rem;
-            margin: 0;
-        }
-        .stat-item p {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .form-control-custom {
-            width: 100%; 
-            background: transparent; 
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; 
-            padding: 12px 0; 
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-        .form-control-custom:focus {
-            outline: none;
-            border-bottom-color: #fff;
-        }
-        .btn-auth {
-            background: #fff; 
-            color: #050505; 
-            border: none; 
-            padding: 16px; 
-            width: 100%;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .btn-auth:hover { opacity: 0.8; }
-
-        @media (max-width: 768px) {
-            .navbar-custom { flex-direction: column; padding: 20px 5%; gap: 15px; }
-            .nav-links { gap: 20px; width: 100%; justify-content: center; flex-wrap: wrap; }
-            .stats-container { flex-direction: column; gap: 15px; }
-        }
-    </style>
     <link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-    <div class="interactive-bg">
-        <div class="orb orb-1" id="orb1"></div>
-        <div class="orb orb-2" id="orb2"></div>
-    </div>
 
     <div id="menu-container"></div>
 
-    <div class="main-content">
-        <div class="profile-box">
-            
+    <header class="page-head field-teal">
+        <div class="page-head__in profile-head">
             <div class="profile-img-container">
-                <img id="displayFoto" src="https://via.placeholder.com/150/111111/FFFFFF?text=?" alt="Foto de perfil">
+                <img id="displayFoto" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Foto de perfil">
             </div>
-            
-            <h2 class="profile-name" id="displayNombre">Cargando...</h2>
-            <div class="profile-role" id="displayRol">---</div>
-
-            <div class="stats-container">
-                <div class="stat-item">
-                    <h4 id="displayApodo">---</h4>
-                    <p>Apodo</p>
-                </div>
-                <div class="stat-item">
-                    <h4 id="displayPuntos">0</h4>
-                    <p>Puntos MySpace</p>
-                </div>
+            <div>
+                <h1 class="display" id="displayNombre">Cargando...</h1>
+                <div class="profile-role" id="displayRol">---</div>
             </div>
-
-            <form id="perfilForm" style="text-align: left; display: none;">
-                <h5 style="font-family: 'Oswald', sans-serif; letter-spacing: 1px; margin-bottom: 20px;">EDITAR PERFIL</h5>
-                
-                <input type="text" id="inputFoto" class="form-control-custom" placeholder="URL de tu foto de perfil (Ej: https://imgur.com/...)">
-                
-                <textarea id="inputBio" class="form-control-custom" rows="2" placeholder="Escribe tu biografía troll aquí..."></textarea>
-                
-                <button type="submit" class="btn-auth">GUARDAR CAMBIOS</button>
-            </form>
-
         </div>
-    </div>
+    </header>
+
+    <main class="page-body">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h2 id="displayApodo">---</h2>
+                <p>Apodo</p>
+            </div>
+            <div class="stat-item">
+                <h2 id="displayPuntos">0</h2>
+                <p>Puntos MySpace</p>
+            </div>
+        </div>
+
+        <div class="profile-box">
+            <form id="perfilForm" style="display: none;">
+                <h2 class="form-title">Editar perfil</h2>
+
+                <label class="field-label" for="inputFoto">URL de tu foto de perfil</label>
+                <input type="text" id="inputFoto" class="form-control-custom" placeholder="Ej: https://imgur.com/...">
+
+                <label class="field-label" for="inputBio">Biografía troll</label>
+                <textarea id="inputBio" class="form-control-custom" rows="2" placeholder="Escribe tu biografía troll aquí..."></textarea>
+
+                <button type="submit" class="btn-auth">Guardar cambios</button>
+            </form>
+        </div>
+    </main>
 
     <script>
         fetch('menu.html')
@@ -237,22 +65,17 @@
                 if (linkPerfil) linkPerfil.classList.add('active');
             });
 
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) - 0.5;
-            const y = (e.clientY / window.innerHeight) - 0.5;
-            document.getElementById('orb1').style.transform = `translate(${x * 80}px, ${y * 80}px)`;
-            document.getElementById('orb2').style.transform = `translate(${x * -60}px, ${y * -60}px)`;
-        });
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
             setTimeout(async () => {
                 const { data: { session } } = await supabaseClient.auth.getSession();
-                
+
                 if (!session) {
                     alert("Debes iniciar sesión para ver tu perfil.");
                     window.location.href = 'login.html';
@@ -261,7 +84,7 @@
 
                 const userId = session.user.id;
                 const nombreSesion = session.user.user_metadata.full_name || "Usuario";
-                
+
                 const { data: perfilData, error } = await supabaseClient
                     .from('amigos')
                     .select('*')
@@ -273,16 +96,16 @@
                 document.getElementById('displayRol').textContent = perfilData?.rol || "Usuario";
                 document.getElementById('displayApodo').textContent = perfilData?.apodo_denigrante || "---";
                 document.getElementById('displayPuntos').textContent = perfilData?.puntos_myspace || "0";
-                
-                const fotoDefault = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombreFinal)}&background=111111&color=ffffff&size=150`;
-                
+
+                const fotoDefault = `https://ui-avatars.com/api/?name=${encodeURIComponent(nombreFinal)}&background=303030&color=ffffff&size=150`;
+
                 if (perfilData && perfilData.foto_url) {
                     document.getElementById('displayFoto').src = perfilData.foto_url;
                     document.getElementById('inputFoto').value = perfilData.foto_url;
                 } else {
                     document.getElementById('displayFoto').src = fotoDefault;
                 }
-                
+
                 if (perfilData && perfilData.biografia_troll) {
                     document.getElementById('inputBio').value = perfilData.biografia_troll;
                 }
@@ -296,10 +119,10 @@
 
                     const { error: updateError } = await supabaseClient
                         .from('amigos')
-                        .upsert({ 
-                            auth_id: userId, 
+                        .upsert({
+                            auth_id: userId,
                             nombre_real: nombreFinal,
-                            foto_url: nuevaFoto, 
+                            foto_url: nuevaFoto,
                             biografia_troll: nuevaBio,
                             rol: perfilData?.rol || 'usuario'
                         }, { onConflict: 'auth_id' });
@@ -317,7 +140,7 @@
                     }
                 });
 
-            }, 500); 
+            }, 500);
         });
     </script>
 </body>

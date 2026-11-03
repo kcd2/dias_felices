@@ -3,209 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#191919">
     <title>Días Felices - Registro</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-dark: #050505;
-            --text-main: #ffffff;
-            --text-muted: #777777;
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
 
-        /* --- FONDO ANIMADO --- */
-        .interactive-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            transition: transform 0.2s ease-out;
-        }
-        .orb-1 {
-            width: 40vw; height: 40vw;
-            background: rgba(255, 255, 255, 0.15);
-            top: -5%; left: -5%;
-            animation: float 20s infinite alternate ease-in-out;
-        }
-        .orb-2 {
-            width: 35vw; height: 35vw;
-            background: rgba(60, 130, 200, 0.2);
-            bottom: -5%; right: -5%;
-            animation: float 25s infinite alternate-reverse ease-in-out;
-        }
-        @keyframes float {
-            0% { margin-top: 0; margin-left: 0; }
-            100% { margin-top: 50px; margin-left: 80px; }
-        }
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=pilcrow-rounded@400,500,700&display=swap" rel="stylesheet">
 
-        /* --- ESTILOS DEL MENÚ Y REGISTRO --- */
-        .navbar-custom {
-            padding: 30px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .navbar-brand-txt {
-            font-family: 'Oswald', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        .nav-links { display: flex; gap: 40px; }
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: color 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active { color: var(--text-main); }
-
-        .main-content {
-            flex: 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            padding: 40px 20px;
-            position: relative;
-        }
-        .auth-box {
-            width: 100%; 
-            max-width: 400px; 
-            padding: 40px;
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(15px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        .form-control-custom {
-            width: 100%; 
-            background: transparent; 
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; 
-            padding: 12px 0; 
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-        .form-control-custom:focus {
-            outline: none;
-            border-bottom-color: #fff;
-        }
-        .btn-auth {
-            background: #fff; 
-            color: #050505; 
-            border: none; 
-            padding: 16px; 
-            width: 100%;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            margin-top: 10px;
-            cursor: pointer;
-            transition: opacity 0.3s;
-        }
-        .btn-auth:hover { opacity: 0.8; }
-
-        /* --- MEDIDOR DE CONTRASEÑA --- */
-        .password-group {
-            margin-bottom: 35px;
-            text-align: left;
-        }
-        .password-group .form-control-custom {
-            margin-bottom: 8px;
-        }
-        .password-reqs {
-            font-size: 0.75rem;
-            color: #777777;
-            margin-bottom: 10px;
-            display: block;
-            letter-spacing: 0.5px;
-        }
-        .strength-bar-container {
-            width: 100%;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        .strength-bar {
-            height: 100%;
-            width: 0%;
-            background: #ffffff;
-            transition: width 0.3s ease, background-color 0.3s ease;
-        }
-
-        /* --- ADAPTACIÓN PARA MÓVILES --- */
-        @media (max-width: 768px) {
-            .navbar-custom {
-                flex-direction: column;
-                padding: 20px 5%;
-                gap: 15px;
-            }
-            .navbar-brand-txt {
-                font-size: 1.4rem;
-                text-align: center;
-            }
-            .nav-links {
-                gap: 20px;
-                width: 100%;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-        }
-    </style>
     <link rel="stylesheet" href="site.css">
 </head>
 <body>
 
-    <div class="interactive-bg">
-        <div class="orb orb-1" id="orb1"></div>
-        <div class="orb orb-2" id="orb2"></div>
-    </div>
 
     <div id="menu-container"></div>
 
-    <main class="main-content auth-page">
+    <main class="main-content auth-page field-red">
         <div class="auth-box">
-            <h3 class="mb-4 text-white text-center" style="font-family: 'Oswald', sans-serif; letter-spacing: 2px;">REGISTRO</h3>
+            <h1 class="display">Registro</h1>
             <form id="registroForm">
-                <input type="text" id="regNombre" class="form-control-custom" placeholder="Nombre completo *" required>
-                <input type="email" id="regEmail" class="form-control-custom" placeholder="Correo electrónico *" required>
-                
+                <label class="field-label" for="regNombre">Nombre completo *</label>
+                <input type="text" id="regNombre" class="form-control-custom" autocomplete="name" required>
+                <label class="field-label" for="regEmail">Correo electrónico *</label>
+                <input type="email" id="regEmail" class="form-control-custom" autocomplete="email" required>
+
                 <div class="password-group">
-                    <input type="password" id="regPassword" class="form-control-custom" placeholder="Contraseña *" required>
-                    <span class="password-reqs">Mínimo 6 caracteres y 1 mayúscula</span>
+                    <label class="field-label" for="regPassword">Contraseña *</label>
+                    <input type="password" id="regPassword" class="form-control-custom" autocomplete="new-password" aria-describedby="regPasswordReqs" required>
+                    <span class="password-reqs" id="regPasswordReqs">Mínimo 6 caracteres y 1 mayúscula</span>
                     <div class="strength-bar-container">
                         <div class="strength-bar" id="strengthBar"></div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-auth">CREAR CUENTA</button>
+                <button type="submit" class="btn-auth">Crear cuenta</button>
             </form>
         </div>
     </main>
@@ -219,13 +49,6 @@
                 if (linkRegistro) linkRegistro.classList.add('active');
             });
 
-        document.addEventListener('mousemove', (e) => {
-            const x = (e.clientX / window.innerWidth) - 0.5;
-            const y = (e.clientY / window.innerHeight) - 0.5;
-            
-            document.getElementById('orb1').style.transform = `translate(${x * 80}px, ${y * 80}px)`;
-            document.getElementById('orb2').style.transform = `translate(${x * -60}px, ${y * -60}px)`;
-        });
 
         // Lógica visual del medidor
         const regPassword = document.getElementById('regPassword');
@@ -239,19 +62,20 @@
             if (val.length >= 6) strength += 50;
             if (/[A-ZÑÁÉÍÓÚÜ]/.test(val)) strength += 50;
 
-            strengthBar.style.width = strength + '%';
+            strengthBar.style.transform = `scaleX(${strength / 100})`;
 
             if (strength === 50) {
-                strengthBar.style.background = '#8ebdf0'; // Azul claro si cumple a medias
+                strengthBar.style.background = '#ffe927'; // Amarillo si cumple a medias
             } else if (strength === 100) {
-                strengthBar.style.background = '#3c82c8'; // Azul intenso si cumple todo
+                strengthBar.style.background = '#2fbf9f'; // Verde si cumple todo
             } else {
                 strengthBar.style.background = '#ffffff'; // Blanco si no cumple nada
             }
         });
     </script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
 </body>
 </html>

@@ -3,57 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#191919">
     <title>Días Felices - Blog</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root { --bg-dark: #050505; --text-main: #ffffff; --border-color: rgba(255, 255, 255, 0.1); }
-        body { background-color: var(--bg-dark); color: var(--text-main); font-family: 'Inter', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
-        
-        .interactive-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-        .orb { position: absolute; border-radius: 50%; filter: blur(80px); transition: transform 0.2s ease-out; }
-        .orb-1 { width: 40vw; height: 40vw; background: rgba(255, 255, 255, 0.15); top: -5%; left: -5%; animation: float 20s infinite alternate ease-in-out; }
-        .orb-2 { width: 35vw; height: 35vw; background: rgba(60, 130, 200, 0.2); bottom: -5%; right: -5%; animation: float 25s infinite alternate-reverse ease-in-out; }
-        @keyframes float { 0% { margin-top: 0; margin-left: 0; } 100% { margin-top: 50px; margin-left: 80px; } }
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=pilcrow-rounded@400,500,700&display=swap" rel="stylesheet">
 
-        .blog-container { max-width: 800px; margin: 40px auto; padding: 20px; width: 100%; }
-        .post-form { background: rgba(20, 20, 20, 0.6); padding: 20px; border: 1px solid var(--border-color); margin-bottom: 40px; }
-        .post-input { width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--border-color); color: #fff; padding: 10px; resize: none; margin-bottom: 15px; }
-        .post-input:focus { outline: none; border-bottom-color: #fff; }
-        .btn-post { background: #fff; color: #000; border: none; padding: 10px 20px; text-transform: uppercase; font-weight: bold; font-family: 'Oswald', sans-serif; cursor: pointer; }
-        
-        .post-card { background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); padding: 20px; margin-bottom: 20px; display: flex; gap: 20px; }
-        .post-avatar { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
-        .post-author { font-family: 'Oswald', sans-serif; font-size: 1.2rem; margin: 0 0 5px 0; }
-        .post-date { font-size: 0.7rem; color: #777; margin-bottom: 10px; display: block; }
-        .post-content { margin: 0; font-size: 0.95rem; line-height: 1.5; color: #ddd; }
-    </style>
     <link rel="stylesheet" href="site.css">
 </head>
 <body>
-    <div class="interactive-bg">
-        <div class="orb orb-1" id="orb1"></div>
-        <div class="orb orb-2" id="orb2"></div>
-    </div>
     <div id="menu-container"></div>
 
-    <div class="blog-container">
-        <p class="eyebrow">Historias de la muchachada</p>
-        <h1 class="mb-4" style="font-family: 'Oswald', sans-serif; letter-spacing: 2px;">El muro</h1>
-        
+    <header class="page-head field-blue">
+        <div class="page-head__in">
+            <h1 class="display">El muro</h1>
+            <p class="page-lede">Historias de la muchachada</p>
+        </div>
+    </header>
+
+    <main class="page-body">
         <form id="formBlog" class="post-form" style="display: none;">
-            <textarea id="contenidoPost" class="post-input" rows="3" placeholder="¿Qué tienes en mente hoy?" required></textarea>
+            <textarea id="contenidoPost" class="post-input" rows="3" placeholder="¿Qué tienes en mente hoy?" aria-label="¿Qué tienes en mente hoy?" required></textarea>
             <button type="submit" class="btn-post">Publicar</button>
         </form>
 
-        <div id="feedBlog">
-            <p class="text-center text-muted">Cargando publicaciones...</p>
+        <div id="feedBlog" class="feed-status">
+            <p>Cargando publicaciones...</p>
         </div>
-    </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
     <script>
         fetch('menu.html').then(r => r.text()).then(d => {
             document.getElementById('menu-container').innerHTML = d;
