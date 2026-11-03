@@ -13,6 +13,7 @@ Un pequeño rincón privado para guardar anécdotas, bromas y recuerdos de la mu
 - `menu.html`: navegación compartida, cargada en cada página.
 - `site.css`: estilos visuales compartidos.
 - `js/auth.js`: autenticación y navegación según sesión y rol.
+- `js/ui.js`: detalles de interfaz: cerrar menús con Escape y la pila de carteles de la portada.
 
 ## Ejecutar en local
 
