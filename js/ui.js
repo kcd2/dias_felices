@@ -1,4 +1,7 @@
-// Detalles de interfaz compartidos: cerrar menús con teclado y, en la portada, la pila de carteles
+// Detalles de interfaz compartidos: teclado en menús, avisos, entradas y progreso de lectura
+document.documentElement.classList.add('js');
+
+
 document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     const abierto = document.querySelector('.nav-dropdown-content.show-gestion, .dropdown-content-custom.show');
@@ -9,68 +12,150 @@ document.addEventListener('keydown', (e) => {
     toggle?.focus();
 });
 
+// Avisos: los alert() de la aplicación se muestran como una copia que sube desde abajo.
+// Si la página redirige justo después, el aviso se guarda y sigue en la página siguiente.
 (() => {
-    const carteles = [...document.querySelectorAll('.poster')];
-    if (!carteles.length) return;
-
-    const raiz = document.documentElement;
-    const reducido = matchMedia('(prefers-reduced-motion: reduce)');
-    if (reducido.matches) return;
-
-    // Un cartel más alto que la pantalla se deja leer hasta abajo antes de quedarse pegado
-    const pila = () => {
-        const arriba = parseFloat(getComputedStyle(raiz).getPropertyValue('--stick-top')) || 0;
-        carteles.forEach((cartel) => {
-            cartel.style.setProperty('--stick', `${Math.min(arriba, innerHeight - cartel.offsetHeight)}px`);
-        });
+    const CLAVE = 'df-avisos';
+    const DURACION = 5200;
+    const leer = () => {
+        try { return JSON.parse(sessionStorage.getItem(CLAVE)) || []; } catch { return []; }
     };
-    raiz.classList.add('stack');
-    pila();
-    addEventListener('resize', pila);
-    if ('ResizeObserver' in window) {
-        const ro = new ResizeObserver(pila);
-        carteles.forEach((cartel) => ro.observe(cartel));
-    }
+    const guardar = (lista) => {
+        try { sessionStorage.setItem(CLAVE, JSON.stringify(lista)); } catch { /* sin almacenamiento, el aviso solo vive aquí */ }
+    };
 
-    // Al tabular hacia atrás, el foco puede caer en un cartel ya tapado: se vuelve a su sitio
-    document.addEventListener('focusin', (e) => {
-        if (!e.target.matches(':focus-visible')) return;
-        const cartel = e.target.closest('.poster');
-        if (!cartel || !cartel.parentElement.matches('.wall')) return;
-        const siguiente = cartel.nextElementSibling;
-        if (!siguiente || siguiente.getBoundingClientRect().top >= e.target.getBoundingClientRect().bottom) return;
-        let y = cartel.parentElement.offsetTop;
-        for (let c = cartel.previousElementSibling; c; c = c.previousElementSibling) y += c.offsetHeight;
-        scrollTo({ top: y, behavior: 'instant' });
-    });
+    let zona;
+    const obtenerZona = () => {
+        if (zona) return zona;
+        zona = document.createElement('div');
+        zona.className = 'avisos';
+        zona.setAttribute('role', 'status');
+        zona.setAttribute('aria-live', 'polite');
+        document.body.append(zona);
+        return zona;
+    };
 
-    // La cita se tiñe palabra a palabra
-    if (CSS.supports('animation-timeline: view()')) {
-        document.querySelectorAll('[data-fill]').forEach((el) => {
-            const palabras = el.textContent.trim().split(/\s+/);
-            el.setAttribute('aria-label', el.textContent.trim());
-            el.textContent = '';
-            palabras.forEach((palabra, i) => {
-                const s = document.createElement('span');
-                s.setAttribute('aria-hidden', 'true');
-                s.style.setProperty('--i', i);
-                s.textContent = palabra;
-                el.append(s, i < palabras.length - 1 ? ' ' : '');
-            });
-            el.classList.add('is-filling');
-        });
-    }
+    const pintar = (aviso) => {
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'aviso';
+        el.textContent = aviso.texto;
+        el.setAttribute('aria-label', `${aviso.texto} Pulsa para cerrar este aviso.`);
+        const quitar = () => {
+            clearTimeout(reloj);
+            guardar(leer().filter((a) => a.id !== aviso.id));
+            el.classList.remove('is-in');
+            setTimeout(() => el.remove(), 220);
+        };
+        const restante = Math.max(1500, DURACION - (Date.now() - aviso.momento));
+        const reloj = setTimeout(quitar, restante);
+        el.addEventListener('click', quitar);
+        obtenerZona().append(el);
+        el.getBoundingClientRect();
+        el.classList.add('is-in');
+    };
 
-    // Entradas de cada capítulo, una sola vez
-    if (!('IntersectionObserver' in window)) return;
-    const piezas = document.querySelectorAll('[data-reveal], [data-mask]');
-    raiz.classList.add('motion');
+    window.alert = (mensaje) => {
+        const aviso = { id: `${Date.now()}-${Math.random()}`, texto: String(mensaje), momento: Date.now() };
+        guardar([...leer(), aviso]);
+        if (document.body) pintar(aviso);
+    };
+
+    const pendientes = leer().filter((a) => Date.now() - a.momento < DURACION);
+    guardar(pendientes);
+    pendientes.forEach(pintar);
+})();
+
+// Encuestas: la opción pulsada se queda marcada, con la misma respuesta inmediata que el aviso
+document.addEventListener('click', (e) => {
+    const opcion = e.target.closest?.('.btn-option');
+    if (!opcion) return;
+    opcion.parentElement.querySelectorAll('.btn-option').forEach((b) => b.classList.toggle('is-elegida', b === opcion));
+});
+
+// Barra de progreso de lectura en las páginas largas
+(() => {
+    const barra = document.createElement('div');
+    barra.className = 'progreso';
+    barra.setAttribute('aria-hidden', 'true');
+    document.body.append(barra);
+    const soportaCSS = CSS.supports('animation-timeline: scroll()');
+    const raiz = document.documentElement;
+    let pendiente = false;
+    const medir = () => {
+        pendiente = false;
+        const recorrido = raiz.scrollHeight - innerHeight;
+        barra.classList.toggle('is-on', recorrido > innerHeight * 0.75);
+        if (!soportaCSS && recorrido > 0) barra.style.transform = `scaleX(${Math.min(1, scrollY / recorrido)})`;
+    };
+    const pedir = () => {
+        if (pendiente) return;
+        pendiente = true;
+        requestAnimationFrame(medir);
+    };
+    addEventListener('scroll', pedir, { passive: true });
+    addEventListener('resize', pedir);
+    if ('ResizeObserver' in window) new ResizeObserver(pedir).observe(document.body);
+    pedir();
+})();
+
+// La tinta de la navegación sigue al capítulo que tiene debajo
+(() => {
+    const capitulos = document.querySelectorAll('[data-ink]');
+    if (!capitulos.length || !('IntersectionObserver' in window)) return;
+    const contenedor = document.getElementById('menu-container');
+    const activos = new Set();
     const io = new IntersectionObserver((entradas) => {
+        entradas.forEach((e) => (e.isIntersecting ? activos.add(e.target) : activos.delete(e.target)));
+        const actual = [...activos][0];
+        if (actual) contenedor.dataset.ink = actual.dataset.ink;
+        else delete contenedor.dataset.ink;
+    }, { rootMargin: '0px 0px -94% 0px' });
+    capitulos.forEach((c) => io.observe(c));
+})();
+
+// Entradas: una sola vez, nunca con el contenido oculto si el script falla
+(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
+    const raiz = document.documentElement;
+    raiz.classList.add('motion');
+
+    const aparece = new IntersectionObserver((entradas) => {
         entradas.forEach((entrada) => {
             if (!entrada.isIntersecting) return;
             entrada.target.classList.add('is-in');
-            io.unobserve(entrada.target);
+            aparece.unobserve(entrada.target);
         });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
-    piezas.forEach((pieza) => io.observe(pieza));
+    document.querySelectorAll('[data-reveal], [data-mask]').forEach((pieza) => aparece.observe(pieza));
+
+    // Lo que llega de Supabase se revela como una copia al entrar en pantalla.
+    // Al recargar el muro tras publicar, solo se revela lo que no se había visto.
+    const REVELABLE = '.post-card, .ranking-item, .poll-card, .stat-item';
+    const vistos = new Set();
+    const revela = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (!entrada.isIntersecting) return;
+            entrada.target.classList.add('is-revelada');
+            revela.unobserve(entrada.target);
+        });
+    }, { rootMargin: '0px 0px -6% 0px' });
+    const preparar = (el) => {
+        const huella = el.textContent.trim();
+        if (vistos.has(huella)) return;
+        vistos.add(huella);
+        el.classList.add('por-revelar');
+        const orden = [...el.parentElement.children].indexOf(el) % 4;
+        el.style.setProperty('--orden', orden);
+        revela.observe(el);
+    };
+    const buscar = (nodo) => {
+        if (nodo.nodeType !== 1) return;
+        if (nodo.matches(REVELABLE)) preparar(nodo);
+        nodo.querySelectorAll(REVELABLE).forEach(preparar);
+    };
+    document.querySelectorAll(REVELABLE).forEach(preparar);
+    new MutationObserver((cambios) => {
+        cambios.forEach((c) => c.addedNodes.forEach(buscar));
+    }).observe(document.body, { childList: true, subtree: true });
 })();

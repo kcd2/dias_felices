@@ -13,7 +13,10 @@ Un pequeño rincón privado para guardar anécdotas, bromas y recuerdos de la mu
 - `menu.html`: navegación compartida, cargada en cada página.
 - `site.css`: estilos visuales compartidos.
 - `js/auth.js`: autenticación y navegación según sesión y rol.
-- `js/ui.js`: detalles de interfaz: cerrar menús con Escape y la pila de carteles de la portada.
+- `js/ui.js`: detalles de interfaz: cerrar menús con Escape, avisos, barra de progreso y entradas al hacer scroll.
+- `js/stage.js` y `js/portada.js`: escenas de scroll de la portada (GSAP y ScrollTrigger).
+- `assets/`: fotos con licencia abierta; sus créditos están en `credits.json` y en el pie de la portada.
+- `DESIGN.md`: dirección visual, tokens y reglas de movimiento.
 
 ## Ejecutar en local
 
