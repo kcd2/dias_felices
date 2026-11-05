@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#191919">
+    <meta name="theme-color" content="#140c0b">
     <meta name="description" content="El rincón compartido para guardar anécdotas, bromas y días felices de la muchachada.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23d71e1e'/%3E%3Ccircle cx='16' cy='16' r='11' fill='%23f7c518'/%3E%3Ccircle cx='12' cy='13' r='1.6' fill='%23140c0b'/%3E%3Ccircle cx='20' cy='13' r='1.6' fill='%23140c0b'/%3E%3Cpath d='M10 18c1.5 5 10.5 5 12 0z' fill='%23140c0b'/%3E%3C/svg%3E">
     <title>Días Felices — nuestro pequeño rincón</title>
-    <script>document.documentElement.classList.add('js')</script>
-    <link rel="preconnect" href="https://api.fontshare.com">
-    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
-    <link href="https://api.fontshare.com/v2/css?f[]=pilcrow-rounded@400,500,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>document.documentElement.classList.add('js');addEventListener('pagereveal',e=>{const t=e.viewTransition;if(t)[t.ready,t.finished].forEach(p=>p.catch(()=>{}))})</script>
     <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body class="home">
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <div id="menu-container"></div>
 
@@ -20,67 +21,123 @@
         <symbol id="i-flecha" viewBox="0 0 16 16"><path d="M4 12L12 4M5.5 4H12v6.5"/></symbol>
     </svg>
 
-    <main class="wall" id="contenido">
-        <section class="poster field-red hero" aria-labelledby="page-title">
-            <h1 class="hero-title display" id="page-title">
-                <span class="line"><span style="--i:0">Días</span></span>
-                <span class="line"><span style="--i:1">Felices.</span></span>
-            </h1>
-            <div class="hero-foot">
-                <p class="hero-copy"><strong>Un rincón de la muchachada.</strong> Las historias que empiezan con «¿te acuerdas de…?» merecen quedarse en algún sitio. Este es el nuestro.</p>
-                <div class="hero-actions">
-                    <a class="btn btn-ink" href="blog.html">Pásate por el muro <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
-                    <a class="link" href="registro.html">Únete a la muchachada</a>
+    <main id="contenido">
+        <!-- Primer acto: el cuarto oscuro. El título se apaga y la cita se revela en el papel -->
+        <section class="scene revelado" data-scene="revelado" data-options='{"hold":2}' aria-labelledby="page-title">
+            <div class="scene-stage">
+                <div class="revelado-foto" data-move>
+                    <img src="assets/revelado.jpg" width="1920" height="1276" alt="Una copia fotográfica en la cubeta, bajo la luz roja de un cuarto oscuro" fetchpriority="high">
+                </div>
+                <div class="revelado-velo" data-move></div>
+                <div class="hero" data-move>
+                    <h1 class="hero-title display" id="page-title">
+                        <span class="line"><span style="--i:0">Días</span></span>
+                        <span class="line"><span style="--i:1">Felices.</span></span>
+                    </h1>
+                    <div class="hero-foot">
+                        <p class="hero-copy"><strong>Un rincón de la muchachada.</strong> Las historias que empiezan con «¿te acuerdas de…?» merecen quedarse en algún sitio. Este es el nuestro.</p>
+                        <div class="hero-actions">
+                            <a class="btn btn-paper" href="blog.html">Pásate por el muro <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+                            <a class="link" href="registro.html">Únete a la muchachada</a>
+                        </div>
+                    </div>
+                </div>
+                <figure class="copia" data-move aria-label="Una nota de la muchachada">
+                    <div class="copia-tono" data-move aria-hidden="true"></div>
+                    <blockquote class="display" data-develop>“Nani sigue sin superar a Chole.”</blockquote>
+                    <figcaption>Una verdad que ya forma parte de la historia.</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- Segundo acto: la cámara atraviesa las copias colgadas en el cuarto -->
+        <section class="scene vuelo" data-scene="vuelo" data-options='{"hold":4}' aria-labelledby="more-title">
+            <div class="scene-stage">
+                <img class="vuelo-fondo" src="assets/luz-roja.jpg" width="1920" height="1920" alt="" loading="lazy" data-move>
+                <div class="vuelo-mundo">
+                    <h2 class="vp vp-titulo display" id="more-title" data-x="0" data-y="0">¿Q'Hubo?</h2>
+
+                    <figure class="vp vp-copia" data-x="-22" data-y="-6">
+                        <img src="assets/kodachrome-estanque.jpg" width="960" height="621" alt="Niños y bañistas a la orilla de un estanque, en color de los años sesenta" loading="lazy">
+                        <figcaption>Estanque de Ostankino, 1964</figcaption>
+                    </figure>
+                    <article class="vp vp-copia vp-texto" data-x="22" data-y="4" data-post="0">
+                        <p class="vp-cuerpo display">El Lentejas</p>
+                        <p class="vp-pie">Candidato a peor apodo de la temporada</p>
+                    </article>
+                    <figure class="vp vp-copia" data-x="-20" data-y="6">
+                        <img src="assets/kodachrome-bomberos.jpg" width="960" height="671" alt="Unos críos subidos a un camión de bomberos, en color de los años cuarenta" loading="lazy">
+                        <figcaption>Críos y camión de bomberos, años 40</figcaption>
+                    </figure>
+                    <article class="vp vp-copia vp-texto" data-x="20" data-y="-8" data-post="1">
+                        <p class="vp-cuerpo display">El manco oficial</p>
+                        <p class="vp-pie">Candidato a peor con los videojuegos</p>
+                    </article>
+                    <figure class="vp vp-copia" data-x="-24" data-y="-2">
+                        <img src="assets/kodachrome-amigas.jpg" width="960" height="640" alt="Dos mujeres junto a un coche, en una diapositiva sin título de 1946" loading="lazy">
+                        <figcaption>Diapositiva sin título, 1946</figcaption>
+                    </figure>
+                    <article class="vp vp-copia vp-texto" data-x="22" data-y="6" data-post="2">
+                        <p class="vp-cuerpo display">El Becario</p>
+                        <p class="vp-pie">Candidato a peor apodo de la temporada</p>
+                    </article>
+                    <figure class="vp vp-copia" data-x="-20" data-y="4">
+                        <img src="assets/kodachrome-huerto.jpg" width="960" height="652" alt="Un hombre sonriente agachado entre sus plantas, hacia 1965" loading="lazy">
+                        <figcaption>O'Neil y sus plantas, hacia 1965</figcaption>
+                    </figure>
+
+                    <div class="vp vp-fin" data-x="0" data-y="0">
+                        <p class="vp-fin-texto display">Todo queda entre amigos</p>
+                        <a class="btn btn-paper" href="blog.html">Ver el muro <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="poster field-yellow quote pasted" id="cartel-cita" aria-label="Una nota de la muchachada">
-            <figure>
-                <blockquote class="display" data-fill>“Nani sigue sin superar a Chole.”</blockquote>
-                <figcaption data-reveal>Una verdad que ya forma parte de la historia.</figcaption>
-            </figure>
-        </section>
-
-        <section class="poster field-charcoal qhubo pasted" id="cartel-qhubo" aria-labelledby="more-title">
-            <div class="qhubo-top" data-reveal>
-                <p class="qhubo-lede">Todo queda entre amigos</p>
-                <a class="link" href="blog.html">Ver el muro <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+        <!-- Tercer acto: se encienden las luces y todo es color -->
+        <section class="scene ventana" data-scene="ventana" data-options='{"hold":1}' aria-labelledby="titulo-muro">
+            <div class="scene-stage">
+                <div class="ventana-campo field-blue muro" id="cartel-muro" data-move>
+                    <svg class="muro-wall" aria-hidden="true" preserveAspectRatio="none">
+                        <defs>
+                            <pattern id="ladrillos" width="240" height="120" patternUnits="userSpaceOnUse">
+                                <rect x="4" y="4" width="232" height="52" rx="2" fill="currentColor"/>
+                                <rect x="-116" y="64" width="232" height="52" rx="2" fill="currentColor"/>
+                                <rect x="124" y="64" width="232" height="52" rx="2" fill="currentColor"/>
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#ladrillos)"/>
+                    </svg>
+                    <p class="note" data-move>Anécdotas, ocurrencias y vídeos para el recuerdo.</p>
+                    <h2 class="poster-title display" id="titulo-muro">
+                        <a class="poster-link stretched" href="blog.html">El muro <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+                    </h2>
+                </div>
             </div>
-            <h2 class="poster-title display" id="more-title">¿Q'Hubo?</h2>
         </section>
 
-        <section class="poster field-blue muro pasted" id="cartel-muro" aria-labelledby="titulo-muro">
-            <svg class="muro-wall" aria-hidden="true" preserveAspectRatio="none">
-                <defs>
-                    <pattern id="ladrillos" width="240" height="120" patternUnits="userSpaceOnUse">
-                        <rect x="4" y="4" width="232" height="52" rx="4" fill="currentColor"/>
-                        <rect x="-116" y="64" width="232" height="52" rx="4" fill="currentColor"/>
-                        <rect x="124" y="64" width="232" height="52" rx="4" fill="currentColor"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#ladrillos)"/>
+        <section class="poster field-teal perfil" id="cartel-perfil" aria-labelledby="titulo-perfil">
+            <div class="fotomaton" aria-hidden="true" data-reveal="tira">
+                <svg viewBox="0 0 200 200"><use href="#cara-feliz"/></svg>
+                <svg viewBox="0 0 200 200"><use href="#cara-guino"/></svg>
+                <svg viewBox="0 0 200 200"><use href="#cara-sorpresa"/></svg>
+                <svg viewBox="0 0 200 200"><use href="#cara-lengua"/></svg>
+            </div>
+            <div class="perfil-texto">
+                <p class="perfil-copy" data-reveal>Personaliza la ficha que te representa en la muchachada.</p>
+                <h2 class="poster-title display" id="titulo-perfil">
+                    <a class="poster-link stretched" href="perfil.html">Tu perfil <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
+                </h2>
+            </div>
+            <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+                <symbol id="cara-feliz" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="#f7c518"/><circle cx="70" cy="80" r="12" fill="#140c0b"/><circle cx="130" cy="80" r="12" fill="#140c0b"/><path d="M52 116c10 36 86 36 96 0z" fill="#140c0b"/></symbol>
+                <symbol id="cara-guino" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="#f7c518"/><circle cx="70" cy="80" r="12" fill="#140c0b"/><path d="M116 80h30" stroke="#140c0b" stroke-width="10" stroke-linecap="round"/><path d="M62 124c20 16 60 16 76-4" fill="none" stroke="#140c0b" stroke-width="10" stroke-linecap="round"/></symbol>
+                <symbol id="cara-sorpresa" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="#f7c518"/><circle cx="70" cy="76" r="14" fill="#140c0b"/><circle cx="130" cy="76" r="14" fill="#140c0b"/><ellipse cx="100" cy="132" rx="18" ry="24" fill="#140c0b"/></symbol>
+                <symbol id="cara-lengua" viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="#f7c518"/><path d="M58 80h26M116 80h26" stroke="#140c0b" stroke-width="10" stroke-linecap="round"/><path d="M58 112h84c-2 22-20 34-42 34s-40-12-42-34z" fill="#140c0b"/><path d="M84 128h34v22a17 17 0 01-34 0z" fill="#d71e1e"/></symbol>
             </svg>
-            <p class="note" data-reveal="note">Anécdotas, ocurrencias y vídeos para el recuerdo.</p>
-            <h2 class="poster-title display" id="titulo-muro">
-                <a class="poster-link stretched" href="blog.html">El muro <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
-            </h2>
         </section>
 
-        <section class="poster field-teal perfil pasted" id="cartel-perfil" aria-labelledby="titulo-perfil">
-            <svg class="smile" viewBox="0 0 200 200" aria-hidden="true" data-reveal="face">
-                <circle cx="100" cy="100" r="100" fill="#ffe927"/>
-                <circle cx="68" cy="78" r="13" fill="#111111"/>
-                <circle cx="132" cy="78" r="13" fill="#111111"/>
-                <path class="smile-mouth" d="M50 118c10 34 90 34 100 0z" fill="#111111"/>
-            </svg>
-            <p class="perfil-copy" data-reveal>Personaliza la ficha que te representa en la muchachada.</p>
-            <h2 class="poster-title display" id="titulo-perfil">
-                <a class="poster-link stretched" href="perfil.html">Tu perfil <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg></a>
-            </h2>
-        </section>
-
-        <section class="poster field-yellow pregunta pasted" id="cartel-pregunta" aria-labelledby="titulo-pregunta">
+        <section class="poster field-yellow pregunta" data-ink="oscura" id="cartel-pregunta" aria-labelledby="titulo-pregunta">
             <div class="pregunta-grid">
                 <div class="pregunta-head">
                     <h2 class="display" id="titulo-pregunta" data-mask>
@@ -108,7 +165,8 @@
         </div>
         <div>
             <a class="closing-name display" href="#contenido">Días Felices.</a>
-            <p class="closing-meta">© Días Felices · Solo para la muchachada</p>
+            <p class="closing-meta">© Días Felices. Solo para la muchachada.</p>
+            <details class="creditos"><summary>Créditos de las fotos</summary><p><a href="https://commons.wikimedia.org/wiki/File:Dark_room.jpg">“Dark room”</a> de Inkaroad, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Dark_Room_in_Yl%C3%A4maa.jpg">“Dark Room in Ylämaa”</a> de Tatu Kosonen, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>; <a href="https://commons.wikimedia.org/wiki/File:Ostankino_pond,_children_and_sunbathers,_1964.jpg">“Ostankino pond, children and sunbathers, 1964”</a> de Thomas Taylor Hammond, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>; <a href="https://commons.wikimedia.org/wiki/File:1940s_Fire_Truck_and_kids_on_Kodachrome_in_Oak_Ridge_Tennessee_(6987505011).jpg">“1940s Fire Truck and kids on Kodachrome”</a> de Ed Westcott, dominio público; <a href="https://commons.wikimedia.org/wiki/File:Found_1940s_Kodachrome_slide._No_title._(50369701382).jpg">“Found 1940s Kodachrome slide”</a> de Britt Fuller, CC0; <a href="https://commons.wikimedia.org/wiki/File:ONeil_with_plants,_circa_1965_(7951551546).jpg">“ONeil with plants, circa 1965”</a> de OSU Special Collections &amp; Archives, sin restricciones conocidas. Todas vía Wikimedia Commons.</p></details>
         </div>
     </footer>
 
@@ -124,5 +182,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/auth.js"></script>
     <script src="js/ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+    <script src="js/stage.js"></script>
+    <script src="js/portada.js"></script>
 </body>
 </html>
